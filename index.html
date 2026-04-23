@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="DeutschGeo">
+<title>DeutschGeo — გერმანული ქართველებისთვის</title>
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- WELCOME OVERLAY -->
+<div id="welcome-overlay">
+  <div class="welcome-card">
+    <div class="welcome-flags">🇬🇪 🇩🇪</div>
+    <div class="welcome-logo-big">Deutsch<span>Geo</span></div>
+    <div class="welcome-subtitle">გერმანული ენის სწავლის პლატფორმა<br>ქართველებისთვის — A1-დან C2-მდე</div>
+    <div class="welcome-label">შეიყვანეთ თქვენი სახელი</div>
+    <input type="text" class="welcome-input" id="name-input" placeholder="მაგ. გიორგი, ნინო..." maxlength="30" autocomplete="off">
+    <button class="welcome-btn" onclick="startApp()">დაწყება →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- ACHIEVEMENT POPUP -->
+<div id="achievement-popup"></div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- LEFT SIDEBAR: Word Categories -->
+  <aside id="left-sidebar">
+    <div class="left-header">
+      <h3>🗂 სიტყვების კატეგორიები</h3>
+      <div class="left-search">
+        <input type="text" id="cat-search" placeholder="მოძებნე კატეგორია..." oninput="filterCategories(this.value)">
+      </div>
+    </div>
+    <div class="left-content" id="cat-list"></div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div id="main-content">
+    <header id="header">
+      <button class="hamburger-btn" onclick="toggleLeft()" title="კატეგორიები">☰</button>
+      <div class="header-logo">Deutsch<span>Geo</span></div>
+      <div class="header-spacer"></div>
+      <div class="header-streak" id="streak-display">🔥 0 დღე</div>
+      <span class="header-greeting" id="header-greeting">გამარჯობა!</span>
+      <button class="hamburger-btn" onclick="toggleRight()" title="მენიუ">⋮</button>
+    </header>
+
+    <div id="page-area">
+
+      <!-- HOME -->
+      <div class="page active" id="page-home">
+        <div class="page-title" id="home-title">გამარჯობა! 👋</div>
+        <div class="page-sub">სწავლის პლატფორმა — SRS ალგორითმი, ხმოვანი გამოთქმა, მიღწევები</div>
+
+        <!-- START LEARNING BUTTON -->
+        <button class="start-learning-btn" onclick="startLearningSession()">
+          <span class="btn-icon">🚀</span>
+          სწავლის დაწყება
+          <span class="btn-sub">— ნაბიჯ-ნაბიჯ, A1-დან C2-მდე</span>
+        </button>
+
+        <!-- DAILY PHRASE -->
+        <div class="daily-phrase-card" id="daily-phrase"></div>
+
+        <!-- PROGRESS -->
+        <div class="home-progress-wrap">
+          <div class="home-progress-label">
+            <span>📈 სწავლის პროგრესი</span>
+            <span id="home-progress-text">0 / 0</span>
+          </div>
+          <div class="home-progress-bar"><div class="home-progress-fill" id="home-progress-fill" style="width:0%"></div></div>
+        </div>
+
+        <!-- STATS -->
+        <div class="cards-grid">
+          <div class="stat-card"><div class="stat-card-icon blue">📚</div><div class="stat-card-body"><div class="stat-card-val" id="stat-words">0</div><div class="stat-card-label">ნასწავლი სიტყვა</div></div></div>
+          <div class="stat-card"><div class="stat-card-icon gold">⚡</div><div class="stat-card-body"><div class="stat-card-val" id="stat-xp">0</div><div class="stat-card-label">XP ქულა</div></div></div>
+          <div class="stat-card"><div class="stat-card-icon green">✅</div><div class="stat-card-body"><div class="stat-card-val" id="stat-tests">0</div><div class="stat-card-label">გავლილი ტესტი</div></div></div>
+          <div class="stat-card"><div class="stat-card-icon rose">🔥</div><div class="stat-card-body"><div class="stat-card-val" id="stat-streak">0</div><div class="stat-card-label">სწავლის სერია</div></div></div>
+        </div>
+
+        <!-- WEEKLY CHART -->
+        <div class="weekly-chart-wrap">
+          <div class="section-card-title" style="margin-bottom:0;">📊 ბოლო 7 დღის XP</div>
+          <div class="weekly-chart" id="weekly-chart"></div>
+        </div>
+
+        <!-- QUICK LESSONS -->
+        <div class="section-card">
+          <div class="section-card-title">🚀 სწრაფი გაკვეთილები</div>
+          <div class="lesson-list" id="quick-lessons"></div>
+        </div>
+      </div>
+
+      <!-- STRUCTURED LEARNING -->
+      <div class="page" id="page-learn">
+        <div class="page-title">🎓 სწავლა</div>
+        <div class="page-sub">SRS ალგორითმი — ჭკვიანი გამეორება, A1 → C2 თანმიმდევრულად</div>
+        <div id="learn-session-area"></div>
+      </div>
+
+      <!-- VOCABULARY -->
+      <div class="page" id="page-vocab">
+        <div class="page-title">📖 ლექსიკონი</div>
+        <div class="page-sub" id="vocab-count-info">500+ სიტყვა ფონეტიკით და ქართული თარგმანით</div>
+        <input type="text" class="vocab-search" id="vocab-search" placeholder="🔍 მოძებნე სიტყვა..." oninput="state.currentVocabPage=1;renderVocab()">
+        <div class="vocab-filter-bar" id="vocab-filters"></div>
+        <div class="vocab-grid" id="vocab-grid"></div>
+        <div class="pagination" id="vocab-pagination"></div>
+      </div>
+
+      <!-- GRAMMAR -->
+      <div class="page" id="page-grammar">
+        <div class="page-title">📝 გრამატიკა</div>
+        <div class="page-sub">გრამატიკის ყველა მნიშვნელოვანი თემა A1-B2</div>
+        <div id="grammar-list"></div>
+      </div>
+
+      <!-- FLASHCARDS -->
+      <div class="page" id="page-flash">
+        <div class="page-title">🔄 Flashcards</div>
+        <div class="page-sub" id="flash-due-info">SRS გამეორება — სიტყვები ოპტიმალურ დროს</div>
+        <div class="vocab-filter-bar" id="flash-filters"></div>
+        <div class="flashcard-container" id="flashcard-area"></div>
+      </div>
+
+      <!-- QUIZ -->
+      <div class="page" id="page-quiz">
+        <div class="page-title">🎮 კვიზი</div>
+        <div class="page-sub">კვიზი მხოლოდ ნასწავლი სიტყვებით</div>
+        <div class="quiz-type-selector" id="quiz-types"></div>
+        <div id="quiz-area"></div>
+      </div>
+
+      <!-- TESTS -->
+      <div class="page" id="page-tests">
+        <div class="page-title">📋 ტესტები</div>
+        <div class="page-sub">ოფიციალური ფორმატის ტესტები — მხოლოდ ნასწავლი სიტყვებით</div>
+        <div class="test-list" id="test-list"></div>
+      </div>
+
+      <!-- PHONETICS -->
+      <div class="page" id="page-phonetics">
+        <div class="page-title">🔊 ფონეტიკა</div>
+        <div class="page-sub">გერმანული ბგერები, IPA სიმბოლოები — შეეხეთ მოსასმენად</div>
+        <div id="phonetics-content"></div>
+      </div>
+
+      <!-- ACHIEVEMENTS -->
+      <div class="page" id="page-achievements">
+        <div class="page-title">🏆 მიღწევები</div>
+        <div class="page-sub">გაარღვიე ახალი მიღწევები და მოიპოვე XP</div>
+        <div class="achievements-grid" id="achievements-grid"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page" id="page-settings">
+        <div class="page-title">⚙️ პარამეტრები</div>
+        <div class="page-sub">მოირგეთ DeutschGeo თქვენს გემოვნებაზე</div>
+        <div class="section-card">
+          <div class="settings-section">
+            <div class="settings-section-title">👤 პროფილი</div>
+            <div class="settings-row">
+              <div class="settings-row-info"><div class="label">სახელი</div><div class="desc">გამოჩნდება მისალმებაში</div></div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <input type="text" id="name-setting" style="padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.85rem;color:var(--text);background:var(--bg3);font-family:var(--font-body);outline:none;width:130px;" maxlength="30">
+                <button class="primary-btn" onclick="saveName()">შენახვა</button>
+              </div>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="settings-section-title">🎨 თემა</div>
+            <div class="theme-grid" id="theme-grid"></div>
+          </div>
+          <div class="settings-section" style="margin-top:20px;">
+            <div class="settings-section-title">💾 მონაცემები</div>
+            <div class="settings-row">
+              <div class="settings-row-info"><div class="label">პროგრესის ექსპორტი</div><div class="desc">JSON ფაილი</div></div>
+              <button class="primary-btn" onclick="exportData()">📤 ექსპორტი</button>
+            </div>
+            <div class="settings-row">
+              <div class="settings-row-info"><div class="label">პროგრესის იმპორტი</div><div class="desc">JSON ფაილიდან</div></div>
+              <button class="primary-btn" onclick="importData()">📥 იმპორტი</button>
+            </div>
+            <div class="settings-row">
+              <div class="settings-row-info"><div class="label">მონაცემების გასუფთავება</div><div class="desc">წაიშლება ყველა პროგრესი</div></div>
+              <button class="clear-storage-btn" onclick="clearStorage()">🗑 გასუფთავება</button>
+            </div>
+          </div>
+          <div class="settings-section" style="margin-top:20px;">
+            <div class="settings-section-title">📱 PWA — ოფლაინ რეჟიმი</div>
+            <div class="settings-row">
+              <div class="settings-row-info"><div class="label">ინსტალაცია</div><div class="desc">დაამატე მთავარ ეკრანზე ბრაუზერის მენიუდან</div></div>
+              <span style="font-size:1.2rem;">📲</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /page-area -->
+  </div><!-- /main-content -->
+
+  <!-- RIGHT SIDEBAR: Navigation -->
+  <nav id="right-sidebar">
+    <div class="rs-logo">
+      <div class="rs-logo-text">Deutsch<span>Geo</span></div>
+      <div class="rs-logo-sub">A1 → C2 · ქართველებისთვის</div>
+    </div>
+    <div class="rs-profile">
+      <div class="rs-avatar" id="rs-avatar">?</div>
+      <div class="rs-name" id="rs-name">სტუდენტი</div>
+      <div class="rs-level" id="rs-level">დონე 1 · Anfänger</div>
+      <div class="rs-xp-bar-wrap"><div class="rs-xp-bar" id="rs-xp-bar" style="width:0%"></div></div>
+      <div class="rs-xp-label"><span id="rs-xp-cur">0 XP</span><span id="rs-xp-next">100 XP</span></div>
+    </div>
+    <div class="rs-nav">
+      <div class="rs-nav-label">მთავარი</div>
+      <div class="rs-nav-item active" onclick="navigate('home')" data-page="home"><span class="rs-nav-icon">🏠</span><span class="rs-nav-text">მთავარი</span></div>
+
+      <div class="rs-nav-label">სწავლა</div>
+      <div class="rs-nav-item" onclick="startLearningSession()" data-page="learn"><span class="rs-nav-icon">🚀</span><span class="rs-nav-text">სწავლის სესია</span></div>
+      <div class="rs-nav-item" onclick="navigate('vocab')" data-page="vocab"><span class="rs-nav-icon">📖</span><span class="rs-nav-text">ლექსიკონი</span></div>
+      <div class="rs-nav-item" onclick="navigate('grammar')" data-page="grammar"><span class="rs-nav-icon">📝</span><span class="rs-nav-text">გრამატიკა</span></div>
+      <div class="rs-nav-item" onclick="navigate('phonetics')" data-page="phonetics"><span class="rs-nav-icon">🔊</span><span class="rs-nav-text">ფონეტიკა</span></div>
+
+      <div class="rs-nav-label">პრაქტიკა</div>
+      <div class="rs-nav-item" onclick="navigate('flash')" data-page="flash">
+        <span class="rs-nav-icon">🔄</span><span class="rs-nav-text">Flashcards</span>
+        <span class="rs-nav-badge" id="flash-due-badge"></span>
+      </div>
+      <div class="rs-nav-item" onclick="navigate('quiz')" data-page="quiz"><span class="rs-nav-icon">🎮</span><span class="rs-nav-text">კვიზი</span></div>
+      <div class="rs-nav-item" onclick="navigate('tests')" data-page="tests"><span class="rs-nav-icon">📋</span><span class="rs-nav-text">ტესტები</span></div>
+
+      <div class="rs-nav-label">პროფილი</div>
+      <div class="rs-nav-item" onclick="navigate('achievements')" data-page="achievements"><span class="rs-nav-icon">🏆</span><span class="rs-nav-text">მიღწევები</span></div>
+      <div class="rs-nav-item" onclick="navigate('settings')" data-page="settings"><span class="rs-nav-icon">⚙️</span><span class="rs-nav-text">პარამეტრები</span></div>
+    </div>
+  </nav>
+
+</div><!-- /app -->
+
+<div id="sidebar-overlay" onclick="closeAllSidebars()"></div>
+
+<script src="js/main.js"></script>
+<script>
+// PWA Service Worker registration
+if("serviceWorker" in navigator){
+  window.addEventListener("load", ()=>{
+    navigator.serviceWorker.register("sw.js")
+      .then(r=>console.log("SW registered:", r.scope))
+      .catch(e=>console.log("SW error:", e));
+  });
+}
+</script>
+</body>
+</html>
