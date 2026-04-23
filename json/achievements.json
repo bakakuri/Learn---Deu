@@ -1,0 +1,22 @@
+[
+  {"id":"first_word","icon":"🌱","name":"პირველი ნაბიჯი","desc":"პირველი სიტყვა ისწავლე","xp":20,"condition":"learnedWords>=1"},
+  {"id":"words_10","icon":"📚","name":"ათეული","desc":"10 სიტყვა ისწავლე","xp":50,"condition":"learnedWords>=10"},
+  {"id":"words_25","icon":"🎯","name":"მეოცდამეხუთე","desc":"25 სიტყვა ისწავლე","xp":100,"condition":"learnedWords>=25"},
+  {"id":"words_50","icon":"🏅","name":"ნახევარი ასეული","desc":"50 სიტყვა ისწავლე","xp":200,"condition":"learnedWords>=50"},
+  {"id":"words_100","icon":"💯","name":"ასეული","desc":"100 სიტყვა ისწავლე","xp":500,"condition":"learnedWords>=100"},
+  {"id":"words_200","icon":"🦁","name":"ლომის გული","desc":"200 სიტყვა ისწავლე","xp":1000,"condition":"learnedWords>=200"},
+  {"id":"words_500","icon":"👑","name":"ლექსიკური მეფე","desc":"500 სიტყვა ისწავლე","xp":2500,"condition":"learnedWords>=500"},
+  {"id":"streak_3","icon":"🔥","name":"სამდღიანი სერია","desc":"3 დღე ზედიზედ ისწავლე","xp":30,"condition":"streak>=3"},
+  {"id":"streak_7","icon":"💫","name":"კვირის გმირი","desc":"7 დღე ზედიზედ ისწავლე","xp":100,"condition":"streak>=7"},
+  {"id":"streak_14","icon":"⚡","name":"ორკვირიანი სერია","desc":"14 დღე ზედიზედ ისწავლე","xp":250,"condition":"streak>=14"},
+  {"id":"streak_30","icon":"🌟","name":"ერთმთვიანი სერია","desc":"30 დღე ზედიზედ ისწავლე","xp":600,"condition":"streak>=30"},
+  {"id":"xp_100","icon":"⚡","name":"პირველი ასი","desc":"100 XP მოაგროვე","xp":0,"condition":"xp>=100"},
+  {"id":"xp_500","icon":"🌊","name":"ხუთასეული","desc":"500 XP მოაგროვე","xp":0,"condition":"xp>=500"},
+  {"id":"xp_1000","icon":"🚀","name":"ათასი XP","desc":"1000 XP მოაგროვე","xp":0,"condition":"xp>=1000"},
+  {"id":"xp_5000","icon":"💎","name":"ალმასი","desc":"5000 XP მოაგროვე","xp":0,"condition":"xp>=5000"},
+  {"id":"test_1","icon":"📝","name":"პირველი ტესტი","desc":"პირველი ტესტი ჩააბარე","xp":40,"condition":"testsCompleted>=1"},
+  {"id":"test_5","icon":"🎖️","name":"ტესტების ოსტატი","desc":"5 ტესტი ჩააბარე","xp":150,"condition":"testsCompleted>=5"},
+  {"id":"quiz_perfect","icon":"💡","name":"იდეალური კვიზი","desc":"კვიზი 100%-ით ჩააბარე","xp":100,"condition":"perfectQuiz>=1"},
+  {"id":"fav_5","icon":"❤️","name":"ფავორიტი","desc":"5 სიტყვა ფავორიტებში დაამატე","xp":20,"condition":"favoriteWords>=5"},
+  {"id":"grammar_5","icon":"📐","name":"გრამატიკოსი","desc":"5 გრამ. თემა გაიხსენი","xp":60,"condition":"grammarViewed>=5"}
+]
